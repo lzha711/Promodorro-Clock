@@ -12,7 +12,9 @@
 void WriteDisplays (uint8_t digit, uint8_t displaynum);
 void WriteREST(uint8_t word, uint8_t displaynum);
 void WriteREDY(uint8_t word, uint8_t displaynum);
+void WriteIDLE(uint8_t word, uint8_t displaynum);
 void Display_REST(void);
+void Display_IDLE(void);
 void Display_REDY(void);
 void Display_OFF(void);
 void DisplayMinutes(void);

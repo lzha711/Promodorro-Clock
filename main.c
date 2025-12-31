@@ -1,8 +1,9 @@
 /*
- * Promo timer code
+ * Promo timer
  *
  * Created: 5/28/2021 10:10:48 AM
  * Modify: 2025 for Timer_A2 project
+ 
  * Author : LZ
  */ 
 
@@ -44,8 +45,9 @@ int main(void)
 	while (true) // main program
 	{	
 		switch (current_state){
+						
 			case STATE_IDLE: 
-				Display_REDY(); 
+				Display_IDLE(); 
 				break; 
 			
 			case STATE_COUNTING: 
@@ -55,7 +57,7 @@ int main(void)
 			
 			case STATE_BUZZING:  // turn off display when buzzer on
 				Display_OFF();
-				play_shutdown_tone();
+				play_shutdown_tone2();
 				// when buzzer is off change state back to idle
 				current_state = STATE_IDLE; 
 				break; 

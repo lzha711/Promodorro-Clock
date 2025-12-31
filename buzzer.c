@@ -100,3 +100,12 @@ void play_shutdown_tone(void) {
 	buzz_sound(1000, 2552);  // G3
 	_delay_ms(100);
 }
+
+void play_shutdown_tone2(){
+	buzz_sound(500, 1910);   // C4
+	_delay_ms(200);
+	buzz_sound(500, 1910);   // C4
+	_delay_ms(200);
+	buzz_sound(500, 1910);   // C4
+	_delay_ms(200);
+}

@@ -18,7 +18,6 @@ typedef enum {
 
 extern SystemState current_state;
 
-
 #define F_CPU 16000000UL //16Mhz crystal
 #define true 1
 #define false 0

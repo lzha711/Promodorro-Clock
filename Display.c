@@ -30,6 +30,14 @@ uint8_t seven_seg_digits[10][7] = {
 	{ 1,1,1,1,0,1,1 }   // = 9
 };
 
+//a-g 7 segment values for word "idle"
+uint8_t seven_seg_IDLE[4][7] = {
+	{ 1,1,1,1,0,0,0 },  // = I
+	{ 1,1,1,1,1,1,0 },  // = D
+	{ 0,0,0,1,1,1,0 },  // = L
+	{ 1,0,0,1,1,1,1 },  // = E
+};
+
 //a-g 7 segment values for word "rest"
 uint8_t seven_seg_REST[4][7] = {
 	{ 1,1,1,0,1,1,1 },  // = R
@@ -137,13 +145,40 @@ void WriteREST(uint8_t wordnum, uint8_t displaynum){
 	}
 }
 
-// turn off display
-void Display_OFF(void){
-	CLEAR_BIT(PORTC, PC2);
-	CLEAR_BIT(PORTC, PC3);
-	CLEAR_BIT(PORTC, PC4);
-	CLEAR_BIT(PORTC, PC5);
+void WriteIDLE(uint8_t wordnum, uint8_t displaynum){
+	uint8_t PD_pin;
+	PORTD &= 0b00000000; //clear port D
+	
+	// multiplex
+	if (displaynum == 0){
+		SET_BIT(PORTC, PC2);
+		CLEAR_BIT(PORTC, PC3);
+		CLEAR_BIT(PORTC, PC4);
+		CLEAR_BIT(PORTC, PC5);
+		}else if (displaynum == 1){
+		CLEAR_BIT(PORTC, PC2);
+		SET_BIT(PORTC, PC3);
+		CLEAR_BIT(PORTC, PC4);
+		CLEAR_BIT(PORTC, PC5);
+		}else if (displaynum == 2){
+		CLEAR_BIT(PORTC, PC2);
+		CLEAR_BIT(PORTC, PC3);
+		SET_BIT(PORTC, PC4);
+		CLEAR_BIT(PORTC, PC5);
+		}else if (displaynum == 3){
+		CLEAR_BIT(PORTC, PC2);
+		CLEAR_BIT(PORTC, PC3);
+		CLEAR_BIT(PORTC, PC4);
+		SET_BIT(PORTC, PC5);
+	}
+	
+	// assign display number
+	for (int segCount = 0; segCount <7; ++segCount){
+		PD_pin = segCount + 1;
+		PORTD |= (seven_seg_IDLE[wordnum][segCount]<<PD_pin); //assign [word][a-g] to PD1-PD7
+	}
 }
+
 
 void WriteREDY(uint8_t wordnum, uint8_t displaynum){
 	uint8_t PD_pin;
@@ -179,6 +214,14 @@ void WriteREDY(uint8_t wordnum, uint8_t displaynum){
 	}
 }
 
+// turn off display
+void Display_OFF(void){
+	CLEAR_BIT(PORTC, PC2);
+	CLEAR_BIT(PORTC, PC3);
+	CLEAR_BIT(PORTC, PC4);
+	CLEAR_BIT(PORTC, PC5);
+}
+
 // display REST
 void Display_REST(void){
 	WriteREST(3,0); //T at sec2
@@ -200,6 +243,18 @@ void Display_REDY(void){
 	WriteREDY(1,2);
 	_delay_us(POV_delay);
 	WriteREDY(0,3);
+	_delay_us(POV_delay);
+}
+
+// display IDLE
+void Display_IDLE(void){
+	WriteIDLE(3,0);
+	_delay_us(POV_delay);
+	WriteIDLE(2,1);
+	_delay_us(POV_delay);
+	WriteIDLE(1,2);
+	_delay_us(POV_delay);
+	WriteIDLE(0,3);
 	_delay_us(POV_delay);
 }
 

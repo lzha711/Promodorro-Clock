@@ -11,5 +11,6 @@
 void buzz_sound(uint16_t tone_duration_ms, uint16_t half_cycle_delay_us);
 void play_timeup_tone(void); 
 void play_shutdown_tone(void);
+void play_shutdown_tone2(void);
 
 #endif /* BUZZER_H_ */

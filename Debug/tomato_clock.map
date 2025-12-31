@@ -18,6 +18,8 @@ Discarded input sections
  .bss           0x00000000        0x0 buzzer.o
  .text.play_timeup_tone
                 0x00000000       0x7a buzzer.o
+ .text.play_shutdown_tone
+                0x00000000       0x7a buzzer.o
  .bss.buzzer_duration_ticks
                 0x00000000        0x2 buzzer.o
  .bss.buzzer_ticks
@@ -27,10 +29,16 @@ Discarded input sections
  .bss           0x00000000        0x0 Display.o
  .text.WriteREST
                 0x00000000       0x72 Display.o
+ .text.WriteREDY
+                0x00000000       0x72 Display.o
  .text.Display_REST
+                0x00000000       0x52 Display.o
+ .text.Display_REDY
                 0x00000000       0x52 Display.o
  .data.seven_seg_GO
                 0x00000000        0xe Display.o
+ .data.seven_seg_REDY
+                0x00000000       0x1c Display.o
  .data.seven_seg_STOP
                 0x00000000       0x1c Display.o
  .data.seven_seg_REST
@@ -233,7 +241,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x53c
+.text           0x00000000      0x51e
  *(.vectors)
  .vectors       0x00000000       0xb4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega328pb/avr5/crtatmega328pb.o
                 0x00000000                __vector_default
@@ -340,51 +348,51 @@ END GROUP
  .text.buzz_sound
                 0x000000f2       0x48 buzzer.o
                 0x000000f2                buzz_sound
- .text.play_shutdown_tone
-                0x0000013a       0x7a buzzer.o
-                0x0000013a                play_shutdown_tone
+ .text.play_shutdown_tone2
+                0x0000013a       0x5c buzzer.o
+                0x0000013a                play_shutdown_tone2
  .text.WriteDisplays
-                0x000001b4       0x72 Display.o
-                0x000001b4                WriteDisplays
+                0x00000196       0x72 Display.o
+                0x00000196                WriteDisplays
+ .text.WriteIDLE
+                0x00000208       0x72 Display.o
+                0x00000208                WriteIDLE
  .text.Display_OFF
-                0x00000226        0xa Display.o
-                0x00000226                Display_OFF
- .text.WriteREDY
-                0x00000230       0x72 Display.o
-                0x00000230                WriteREDY
- .text.Display_REDY
-                0x000002a2       0x52 Display.o
-                0x000002a2                Display_REDY
+                0x0000027a        0xa Display.o
+                0x0000027a                Display_OFF
+ .text.Display_IDLE
+                0x00000284       0x52 Display.o
+                0x00000284                Display_IDLE
  .text.DisplaySeconds
-                0x000002f4       0x50 Display.o
-                0x000002f4                DisplaySeconds
+                0x000002d6       0x50 Display.o
+                0x000002d6                DisplaySeconds
  .text.DisplayMinutes
-                0x00000344       0x50 Display.o
-                0x00000344                DisplayMinutes
- .text.init     0x00000394       0x16 main.o
-                0x00000394                init
- .text.main     0x000003aa       0x34 main.o
-                0x000003aa                main
+                0x00000326       0x50 Display.o
+                0x00000326                DisplayMinutes
+ .text.init     0x00000376       0x16 main.o
+                0x00000376                init
+ .text.main     0x0000038c       0x34 main.o
+                0x0000038c                main
  .text.TIMER0_init
-                0x000003de       0x18 timer.o
-                0x000003de                TIMER0_init
+                0x000003c0       0x18 timer.o
+                0x000003c0                TIMER0_init
  .text.__vector_14
-                0x000003f6       0x90 timer.o
-                0x000003f6                __vector_14
+                0x000003d8       0x90 timer.o
+                0x000003d8                __vector_14
  .text.TIMER1_init
-                0x00000486       0x22 timer.o
-                0x00000486                TIMER1_init
+                0x00000468       0x22 timer.o
+                0x00000468                TIMER1_init
  .text.__vector_11
-                0x000004a8       0x72 timer.o
-                0x000004a8                __vector_11
+                0x0000048a       0x72 timer.o
+                0x0000048a                __vector_11
  .text.libgcc.mul
-                0x0000051a       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x0000051a                __umulhisi3
-                0x00000538                . = ALIGN (0x2)
+                0x000004fc       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x000004fc                __umulhisi3
+                0x0000051a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000538        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000538                _exit
-                0x00000538                exit
+ .fini9         0x0000051a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000051a                _exit
+                0x0000051a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -403,17 +411,17 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000538        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000051a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000053c                _etext = .
+                0x0000051e                _etext = .
 
-.data           0x00800100       0x66 load address 0x0000053c
+.data           0x00800100       0x66 load address 0x0000051e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.seven_seg_REDY
+ .data.seven_seg_IDLE
                 0x00800100       0x1c Display.o
-                0x00800100                seven_seg_REDY
+                0x00800100                seven_seg_IDLE
  .data.seven_seg_digits
                 0x0080011c       0x46 Display.o
                 0x0080011c                seven_seg_digits
@@ -450,8 +458,8 @@ END GROUP
                 0x00800168                debounce_counter1
  *(COMMON)
                 0x00800169                PROVIDE (__bss_end, .)
-                0x0000053c                __data_load_start = LOADADDR (.data)
-                0x000005a2                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000051e                __data_load_start = LOADADDR (.data)
+                0x00000584                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800169        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -525,64 +533,64 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xe8
+.debug_aranges  0x00000000      0x100
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x30 buzzer.o
+                0x00000000       0x38 buzzer.o
  .debug_aranges
-                0x00000030       0x58 Display.o
+                0x00000038       0x68 Display.o
  .debug_aranges
-                0x00000088       0x28 main.o
+                0x000000a0       0x28 main.o
  .debug_aranges
-                0x000000b0       0x38 timer.o
+                0x000000c8       0x38 timer.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xec3
+.debug_info     0x00000000     0x11cf
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x472 buzzer.o
- .debug_info    0x00000472      0x719 Display.o
- .debug_info    0x00000b8b      0x1d4 main.o
- .debug_info    0x00000d5f      0x164 timer.o
+ .debug_info    0x00000000      0x5a6 buzzer.o
+ .debug_info    0x000005a6      0x8f1 Display.o
+ .debug_info    0x00000e97      0x1d4 main.o
+ .debug_info    0x0000106b      0x164 timer.o
 
-.debug_abbrev   0x00000000      0x419
+.debug_abbrev   0x00000000      0x439
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x13e buzzer.o
- .debug_abbrev  0x0000013e      0x172 Display.o
- .debug_abbrev  0x000002b0       0xbf main.o
- .debug_abbrev  0x0000036f       0xaa timer.o
+ .debug_abbrev  0x0000013e      0x192 Display.o
+ .debug_abbrev  0x000002d0       0xbf main.o
+ .debug_abbrev  0x0000038f       0xaa timer.o
 
-.debug_line     0x00000000      0x95b
+.debug_line     0x00000000      0xa88
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000      0x1f9 buzzer.o
- .debug_line    0x000001f9      0x43f Display.o
- .debug_line    0x00000638      0x147 main.o
- .debug_line    0x0000077f      0x1dc timer.o
+ .debug_line    0x00000000      0x23d buzzer.o
+ .debug_line    0x0000023d      0x528 Display.o
+ .debug_line    0x00000765      0x147 main.o
+ .debug_line    0x000008ac      0x1dc timer.o
 
-.debug_frame    0x00000000      0x1a8
+.debug_frame    0x00000000      0x1d8
  *(.debug_frame)
- .debug_frame   0x00000000       0x50 buzzer.o
- .debug_frame   0x00000050       0xac Display.o
- .debug_frame   0x000000fc       0x34 main.o
- .debug_frame   0x00000130       0x78 timer.o
+ .debug_frame   0x00000000       0x60 buzzer.o
+ .debug_frame   0x00000060       0xcc Display.o
+ .debug_frame   0x0000012c       0x34 main.o
+ .debug_frame   0x00000160       0x78 timer.o
 
-.debug_str      0x00000000      0x432
+.debug_str      0x00000000      0x442
  *(.debug_str)
- .debug_str     0x00000000      0x250 buzzer.o
-                                0x284 (size before relaxing)
- .debug_str     0x00000250      0x112 Display.o
-                                0x2e3 (size before relaxing)
- .debug_str     0x00000362       0x87 main.o
-                                0x271 (size before relaxing)
- .debug_str     0x000003e9       0x49 timer.o
-                                0x263 (size before relaxing)
+ .debug_str     0x00000000      0x23a buzzer.o
+                                0x26e (size before relaxing)
+ .debug_str     0x0000023a      0x138 Display.o
+                                0x2df (size before relaxing)
+ .debug_str     0x00000372       0x87 main.o
+                                0x248 (size before relaxing)
+ .debug_str     0x000003f9       0x49 timer.o
+                                0x239 (size before relaxing)
 
-.debug_loc      0x00000000      0x93f
+.debug_loc      0x00000000      0xbbc
  *(.debug_loc)
- .debug_loc     0x00000000      0x305 buzzer.o
- .debug_loc     0x00000305      0x5b5 Display.o
- .debug_loc     0x000008ba       0x85 timer.o
+ .debug_loc     0x00000000      0x3dd buzzer.o
+ .debug_loc     0x000003dd      0x75a Display.o
+ .debug_loc     0x00000b37       0x85 timer.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -602,12 +610,12 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0xa8
+.debug_ranges   0x00000000       0xc0
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x20 buzzer.o
- .debug_ranges  0x00000020       0x48 Display.o
- .debug_ranges  0x00000068       0x18 main.o
- .debug_ranges  0x00000080       0x28 timer.o
+ .debug_ranges  0x00000000       0x28 buzzer.o
+ .debug_ranges  0x00000028       0x58 Display.o
+ .debug_ranges  0x00000080       0x18 main.o
+ .debug_ranges  0x00000098       0x28 timer.o
 
 .debug_macro
  *(.debug_macro)
